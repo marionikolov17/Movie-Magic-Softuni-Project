@@ -3,7 +3,7 @@ const path = require("path");
 
 function expressConfig(app) {
     app.use(express.static(path.resolve("public")));
-
+    app.use(express.urlencoded({ extended: false }));
     return app;
 }
 
