@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
-    res.render("home");
-});
+const viewsController = require("./../controllers/viewsController");
+
+router.use(viewsController);
 
 module.exports = router;
