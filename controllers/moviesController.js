@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { createMovie, getMovie } = require('../services/movieService');
+const { createMovie, getMovie, attachCast, getMovieCasts } = require('../services/movieService');
 
 const { getCasts } = require("../services/castService");
 
@@ -15,13 +15,23 @@ router.get("/search", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const movie = await getMovie(req.params.id);
     movie.ratingStars = "&#x2605; ".repeat(movie.rating).trimEnd();
-    res.render("details", { movie });
+
+    const casts = await getMovieCasts(req.params.id);
+    console.log(casts)
+
+    res.render("details", { movie, casts: casts.cast });
 });
 
 router.get("/:id/attach", async (req, res) => {
     const movie = await getMovie(req.params.id);
     const casts = await getCasts();
     res.render("castAttach", { movie, casts });
+});
+
+router.post("/:id/attach", async (req, res) => {
+    await attachCast(req.params.id, req.body.cast);
+
+    res.redirect("/");
 });
 
 router.post("/create", async (req, res) => {
