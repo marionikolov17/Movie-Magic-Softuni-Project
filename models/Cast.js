@@ -35,6 +35,6 @@ const castSchema = new mongoose.Schema({
     }
 });
 
-const castModel = mongoose.Model("Cast", castSchema);
+const castModel = mongoose.model("Cast", castSchema);
 
 module.exports = castModel;
