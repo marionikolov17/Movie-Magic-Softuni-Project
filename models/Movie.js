@@ -38,7 +38,7 @@ const movieSchema = new mongoose.Schema({
             validator: function(value) {
                 return /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig.test(value)
             },
-            message: "Image URL should start with http/s"
+            message: "Image should be valid URL!"
         }
     },
     cast: {
