@@ -41,10 +41,10 @@ const movieSchema = new mongoose.Schema({
             message: "Image should be valid URL!"
         }
     },
-    cast: {
+    cast: [{
         type: mongoose.Types.ObjectId,
         ref: "Cast"
-    }
+    }]
 });
 
 const movieModel = mongoose.model("Movie", movieSchema);
