@@ -24,6 +24,16 @@
     <div class="card_right">
       <img src={{movie.imageUrl}} alt="image" />
     </div>
+
   </div>
 
+  <div class="main-cast-card">
+    {{#each casts}}
+      {{> castCard}}
+
+      {{else}}
+      <h2>There are no casts...</h2>
+    {{/each}}
+    </div>
+  </div>
 </section>
