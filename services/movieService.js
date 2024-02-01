@@ -1,54 +1,15 @@
-const fs = require("fs/promises");
-const path = require("path");
+const movieModel = require("../models/Movie");
 
-const getMovies = async () => {
-    const data = await fs.readFile(path.resolve("database/data.json"), "utf-8");
+const getMovies = async () => movieModel.find().lean();
 
-    return JSON.parse(data);
-}
+const getMovie = async (id) => movieModel.findById(id).lean();
 
-const getMovie = async (id) => {
-    const movies = await getMovies();
-
-    const movie = movies.find(el => el.id === id);
-    return movie;
-}
-
-const createMovie = async (data) => {
-    console.log(data);
-    const movies = await getMovies();
-    data.id = movies[movies.length-1].id + 1;
-    movies.push(data);
-    console.log(movies);
-    await fs.writeFile(path.resolve("database/data.json"), JSON.stringify(movies));
-}
-
-const searchMovies = async (query) => {
-    let movies = await getMovies();
-    if (Object.keys(query).length === 0) {
-        return movies;
-    }
-
-    if (query.title !== "") {
-        movies = movies.filter(movie => movie.title.toLowerCase().includes(query.title.toLowerCase()));
-    }
-
-    if (query.genre !== "") {
-        movies = movies.filter(movie => movie.genre.toLowerCase() === query.genre.toLowerCase());
-    }
-
-    if (query.year !== "") {
-        movies = movies.filter(movie => movie.year == query.year);
-    }
-
-    return movies;
-}
+const createMovie = async (data) => movieModel.create(data);
 
 module.exports = {
     getMovies,
     getMovie,
     createMovie,
-    searchMovies
 }
 
 
