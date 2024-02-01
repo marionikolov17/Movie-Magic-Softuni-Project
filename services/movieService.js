@@ -6,10 +6,16 @@ const getMovie = async (id) => movieModel.findById(id).lean();
 
 const createMovie = async (data) => movieModel.create(data);
 
+const attachCast = async (id, cast) => movieModel.findByIdAndUpdate(id, { $push: { cast: cast } });
+
+const getMovieCasts = async (id) => movieModel.findById(id).populate('cast').lean();
+
 module.exports = {
     getMovies,
     getMovie,
     createMovie,
+    attachCast,
+    getMovieCasts
 }
 
 
