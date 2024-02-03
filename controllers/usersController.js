@@ -10,6 +10,12 @@ router.get("/register", (req, res) => {
     res.render("users/register");
 });
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("auth");
+
+    res.redirect("/login");
+});
+
 router.post("/register", async (req, res) => {
     await userService.registerUser(req.body);
 
