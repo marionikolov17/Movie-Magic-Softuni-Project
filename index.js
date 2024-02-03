@@ -6,6 +6,10 @@ const mongoose = require("mongoose");
 const handlebarsConfig = require("./config/handlebarsConfig");
 const expressConfig = require("./config/expressConfig");
 
+// Auth middleware
+
+const auth = require("./middlewares/authMiddleware");
+
 // Router imports
 const router = require("./routes/routes");
 
@@ -17,6 +21,7 @@ handlebarsConfig(app);
 // Express config
 expressConfig(app);
 
+app.use(auth.authMiddleware);
 app.use(router);
 
 const port = 5000;
