@@ -3,10 +3,16 @@ const router = require("express").Router();
 const userService = require("./../services/userService");
 
 router.get("/login", (req, res) => {
+    if (req.userId) {
+        return res.redirect("/");
+    }
     res.render("users/login");
 });
 
 router.get("/register", (req, res) => {
+    if (req.userId) {
+        return res.redirect("/");
+    }
     res.render("users/register");
 });
 
