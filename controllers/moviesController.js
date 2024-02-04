@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
     movie.ratingStars = "&#x2605; ".repeat(movie.rating).trimEnd();
 
     const casts = await getMovieCasts(req.params.id);
-    console.log(casts)
+    //console.log(casts)
 
     res.render("details", { movie, casts: casts.cast });
 });
